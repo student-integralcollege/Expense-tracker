@@ -18,7 +18,6 @@ MERN expense tracker with authentication, expenses, budgets, dashboard analytics
 - `PORT=5001`
 - `MONGODB_URI=...`
 - `CLIENT_URL=http://localhost:5173`
-- `JWT_SECRET=...`
 - `OPENAI_API_KEY=` optional
 - `OPENAI_MODEL=gpt-4o-mini`
 - `OPENAI_BASE_URL=` optional

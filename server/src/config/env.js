@@ -17,7 +17,6 @@ const envSchema = z.object({
   GROQ_API_KEY: z.string().optional(),
   GROQ_MODEL: z.string().default("llama-3.1-8b-instant"),
   AI_REQUEST_TIMEOUT_MS: z.coerce.number().int().positive().default(20000),
-  JWT_SECRET: z.string().min(10, "JWT_SECRET is required"),
 });
 
 export const env = envSchema.parse(process.env);

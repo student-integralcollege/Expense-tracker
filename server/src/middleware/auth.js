@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { env } from "../config/env.js";
+import { JWT_SECRET } from "../config/auth.js";
 import { User } from "../models/User.js";
 import { createHttpError } from "../utils/http.js";
 
@@ -12,7 +12,7 @@ export const requireAuth = async (req, _res, next) => {
       throw createHttpError(401, "Authentication required");
     }
 
-    const payload = jwt.verify(token, env.JWT_SECRET);
+    const payload = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(payload.userId).select("-password");
 
     if (!user) {
