@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Sparkles, ArrowRight, Mail, Lock, User, Wallet } from "lucide-react";
+import { BrandLogo } from "../ui/BrandLogo";
 
 export function AuthPanel({ mode, onModeChange, onSubmit, onDemoStart, loading, error }) {
   const [formState, setFormState] = useState({
@@ -28,6 +29,17 @@ export function AuthPanel({ mode, onModeChange, onSubmit, onDemoStart, loading, 
         
         {/* Marketing/Hero Info Panel */}
         <section className="lg:col-span-7 text-left space-y-6 max-w-xl">
+          <div className="flex items-center gap-3">
+            <BrandLogo size="lg" className="shadow-md shadow-teal-100" />
+            <div>
+              <h1 className="font-extrabold font-outfit text-slate-800 text-xl leading-none">
+                Expense Tracker
+              </h1>
+              <span className="text-[10px] text-slate-400 font-semibold tracking-wide uppercase">
+                Personal Finance
+              </span>
+            </div>
+          </div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-xs font-semibold">
             <Wallet size={14} />
             <span>Smart Personal Finance</span>

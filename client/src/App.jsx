@@ -13,6 +13,7 @@ import {
 import { AuthPanel } from "./components/features/AuthPanel";
 import { FinancialOverviewSection } from "./components/features/FinancialOverviewSection";
 import { ProfileSection } from "./components/features/ProfileSection";
+import { BrandLogo } from "./components/ui/BrandLogo";
 import { ExpenseTable } from "./components/ui/ExpenseTable";
 import { MetricCard } from "./components/ui/MetricCard";
 import { Navbar } from "./components/ui/Navbar";
@@ -437,9 +438,7 @@ function App() {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 bg-white border-r border-slate-100 z-20">
         <div className="p-6 border-b border-slate-100 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-teal-500 text-white flex items-center justify-center font-bold text-lg font-outfit shadow-md shadow-teal-100">
-            ET
-          </div>
+          <BrandLogo className="shadow-md shadow-teal-100" />
           <div>
             <h1 className="font-extrabold font-outfit text-slate-800 text-base leading-none">
               Expense Tracker
@@ -497,9 +496,7 @@ function App() {
             </div>
 
             <div className="p-6 border-b border-slate-100 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-teal-500 text-white flex items-center justify-center font-bold text-lg font-outfit shadow-md">
-                ET
-              </div>
+              <BrandLogo className="shadow-md shadow-teal-100" />
               <div>
                 <h1 className="font-extrabold font-outfit text-slate-800 text-base leading-none">
                   Expense Tracker
@@ -567,8 +564,9 @@ function App() {
           >
             <Menu size={20} />
           </button>
-          <div className="flex items-center gap-1.5 font-outfit font-extrabold text-slate-800">
-            <span className="text-teal-500 font-black">ET</span> Dashboard
+          <div className="flex items-center gap-2 font-outfit font-extrabold text-slate-800">
+            <BrandLogo size="sm" />
+            <span>Dashboard</span>
           </div>
           <div className="w-8 h-8 rounded-full bg-teal-500 text-white font-bold flex items-center justify-center text-xs">
             {displayUser?.name?.[0]?.toUpperCase() || "U"}
@@ -658,7 +656,7 @@ function App() {
                 {/* Large Hero Card Section */}
                 <HeroCard
                   onAddTransactionClick={() => {
-                    setModalInitialType("expense");
+                    setModalInitialType(null);
                     setEditingExpense(null);
                     setIsTransactionModalOpen(true);
                   }}

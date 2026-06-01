@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CircleDollarSign, CreditCard, Calendar, Tag, FileText } from "lucide-react";
-import { categories, paymentMethods } from "../../constants/index.js";
+import { expenseCategories, incomeCategories, paymentMethods } from "../../constants/index.js";
 
 const initialState = {
   title: "",
@@ -31,6 +31,8 @@ export function TransactionForm({
     }
   }, [editingExpense, forcedType]);
 
+  const availableCategories = type === "income" ? incomeCategories : expenseCategories;
+
   const current = editingExpense
     ? {
         ...editingExpense,
@@ -42,6 +44,9 @@ export function TransactionForm({
         type: forcedType || initialState.type,
         category: forcedType === "income" ? "Salary" : "Food",
       };
+  const selectedCategory = availableCategories.includes(current.category)
+    ? current.category
+    : availableCategories[0];
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -103,6 +108,8 @@ export function TransactionForm({
           name="title"
           type="text"
           defaultValue={current.title}
+          minLength="2"
+          maxLength="120"
           placeholder={type === "income" ? "e.g., Salary payout, Client fee" : "e.g., Grocery shopping, Utilities"}
           className="w-full px-4 py-2.5 rounded-[14px] border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all text-sm bg-white text-slate-700"
           required
@@ -119,7 +126,7 @@ export function TransactionForm({
           <input
             name="amount"
             type="number"
-            min="0"
+            min="0.01"
             step="0.01"
             defaultValue={current.amount}
             placeholder="0.00"
@@ -153,10 +160,11 @@ export function TransactionForm({
         </span>
         <select
           name="category"
-          defaultValue={current.category}
+          defaultValue={selectedCategory}
           className="w-full px-4 py-2.5 rounded-[14px] border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all text-sm bg-white text-slate-700 cursor-pointer"
+          required
         >
-          {categories.map((cat) => (
+          {availableCategories.map((cat) => (
             <option key={cat} value={cat}>
               {cat}
             </option>
@@ -175,6 +183,7 @@ export function TransactionForm({
             name="paymentMethod"
             defaultValue={current.paymentMethod}
             className="w-full pl-10 pr-4 py-2.5 rounded-[14px] border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all text-sm bg-white text-slate-700 cursor-pointer"
+            required
           >
             {paymentMethods.map((method) => (
               <option key={method} value={method}>
@@ -196,6 +205,7 @@ export function TransactionForm({
             name="tags"
             type="text"
             defaultValue={current.tags}
+            maxLength="180"
             placeholder="e.g., weekly, essentials, bills"
             className="w-full pl-10 pr-4 py-2.5 rounded-[14px] border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all text-sm bg-white text-slate-700"
           />
@@ -213,6 +223,7 @@ export function TransactionForm({
             name="notes"
             rows="3"
             defaultValue={current.notes}
+            maxLength="300"
             placeholder="Optional details or description..."
             className="w-full pl-10 pr-4 py-2.5 rounded-[14px] border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all text-sm bg-white text-slate-700"
           />
